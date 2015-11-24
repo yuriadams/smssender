@@ -3,12 +3,13 @@ package controllers
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"time"
 
 	"github.com/julienschmidt/httprouter"
 	"github.com/yuriadams/bluestreak/api/models"
-	// "github.com/yuriadams/gocomtele"
+	"github.com/yuriadams/gocomtele"
 )
 
 type (
@@ -35,13 +36,15 @@ func (smsc *SMSController) SendSMSHandler(w http.ResponseWriter, r *http.Request
 	var fv FormValues
 	json.Unmarshal(rawBody, &fv)
 
+	log.Printf(fmt.Sprintf("%s\n", fv))
+
 	switch fv["smsDispatcher"] {
 	case "comtele":
-		// comtele := comtele.NewComteleClient(fv["authToken"])
+		comtele := comtele.NewComteleClient(fv["authToken"])
 		from := fv["from"]
 		to := fv["to"]
 		message := fv["message"]
-		// comtele.SendSMS(from, to, message)
+		comtele.SendSMS(from, to, message)
 		RespondWithJSON(w, fmt.Sprintf("message: %s sended with success to %s from %s\n", message, to, from))
 	}
 }
