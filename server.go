@@ -7,7 +7,7 @@ import (
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
-	"github.com/yuriadams/bluestreak/api/controllers"
+	"github.com/yuriadams/smssender/api/controllers"
 )
 
 var (

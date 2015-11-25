@@ -8,8 +8,8 @@ import (
 	"time"
 
 	"github.com/julienschmidt/httprouter"
-	"github.com/yuriadams/bluestreak/api/models"
 	"github.com/yuriadams/gocomtele"
+	"github.com/yuriadams/smssender/api/models"
 )
 
 type (
@@ -35,7 +35,6 @@ func (smsc *SMSController) SendSMSHandler(w http.ResponseWriter, r *http.Request
 
 	var fv FormValues
 	json.Unmarshal(rawBody, &fv)
-
 	log.Printf(fmt.Sprintf("%s\n", fv))
 
 	switch fv["smsDispatcher"] {
